@@ -1,0 +1,3 @@
+# SimpleNvim
+
+neovim config
