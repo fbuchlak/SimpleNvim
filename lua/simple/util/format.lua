@@ -19,7 +19,7 @@ function M.format_with_formatter()
     local Checkbox = require("simple.config.icons").common.Checkbox
 
     local items = { { icon = "󰒋 ", name = lsp_fallback_formatter } }
-    local bufitems = conform.list_formatters_for_buffer()
+    local bufitems = vim.tbl_flatten(conform.list_formatters_for_buffer())
 
     vim.list_extend(items, vim.tbl_map(function(name) return { name = name, icon = Checkbox } end, bufitems))
     vim.list_extend(

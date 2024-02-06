@@ -6,12 +6,12 @@ return {
         opts = {
             current_line_blame = true,
             signs = {
-                add = { text = require("simple.config.icons").common },
-                change = { text = require("simple.config.icons").common },
-                delete = { text = require("simple.config.icons").common },
-                topdelete = { text = require("simple.config.icons").common },
-                changedelete = { text = require("simple.config.icons").common },
-                untracked = { text = require("simple.config.icons").common },
+                add = { text = require("simple.config.icons").common.OutlineBoxPlus },
+                change = { text = require("simple.config.icons").common.OutlineBoxPencil },
+                delete = { text = require("simple.config.icons").common.OutlineBoxMinus },
+                topdelete = { text = require("simple.config.icons").common.OutlineBoxMinus },
+                changedelete = { text = require("simple.config.icons").common.OutlineBoxPlusMinus },
+                untracked = { text = require("simple.config.icons").common.OutlineBoxQuestionmark },
             },
             on_attach = function(bufnr)
                 local gs = require("gitsigns")

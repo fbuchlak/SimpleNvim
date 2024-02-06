@@ -9,18 +9,19 @@ local formatters_by_ft = {
 
 ---@param fts string[]
 ---@param formatters string[]
-local function set_formatters(fts, formatters)
+local function add_formatter_group(fts, formatters)
     for _, ft in pairs(fts) do
-        formatters_by_ft[ft] = formatters
+        formatters_by_ft[ft] = formatters_by_ft[ft] or {}
+        table.insert(formatters_by_ft[ft], formatters)
     end
 end
 
-set_formatters({ "sh", "bash", "zsh" }, { "beautysh", "shellharden" })
-set_formatters({ "sql", "mysql" }, { "sqlfluff" })
-set_formatters({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
-set_formatters({ "lua" }, { "stylua" })
+add_formatter_group({ "sh", "bash", "zsh" }, { "beautysh", "shellharden" })
+add_formatter_group({ "sql", "mysql" }, { "sqlfluff" })
+add_formatter_group({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
+add_formatter_group({ "lua" }, { "stylua" })
 -- stylua: ignore
-set_formatters({
+add_formatter_group({
     "html", "css", "sass", "scss", "less",
     "javascript", "javascriptreact",
     "typescript", "typescriptreact",
@@ -79,9 +80,24 @@ return {
             },
         },
         keys = {
-            { "<LocalLeader>ff", function() util.format(false) end, desc = "Format", mode = { "n", "v" } },
-            { "<LocalLeader>fw", function() util.format(true) end, desc = "Format & Save", mode = { "n", "v" } },
-            { "<LocalLeader>fs", util.format_with_formatter, desc = "[Format] Select Formatter", mode = { "n", "v" } },
+            {
+                "<LocalLeader>ff",
+                function() util.format(false) end,
+                desc = "Format",
+                mode = { "n", "v" },
+            },
+            {
+                "<LocalLeader>fw",
+                function() util.format(true) end,
+                desc = "Format & Save",
+                mode = { "n", "v" },
+            },
+            {
+                "<LocalLeader>fs",
+                util.format_with_formatter,
+                desc = "[Format] Select Formatter",
+                mode = { "n", "v" },
+            },
         },
     },
 }
