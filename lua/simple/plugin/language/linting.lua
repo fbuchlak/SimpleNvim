@@ -64,13 +64,6 @@ return {
                         "--error-format=json",
                         "--no-progress",
                     },
-                    __conditions = {
-                        function()
-                            -- use phpactor diagnostics instead
-                            return not require("simple.util").has_root_file({ ".phpactor.json", ".phpactor.yml" })
-                                or 0 == #vim.lsp.get_clients({ name = "phpactor", bufnr = 0 })
-                        end,
-                    },
                 },
                 phpinsights = {
                     __conditions = {
