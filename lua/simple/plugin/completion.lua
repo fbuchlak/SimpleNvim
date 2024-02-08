@@ -38,9 +38,11 @@ return {
                     ["<C-d>"] = cmp.mapping.scroll_docs(4),
                     ["<C-u>"] = cmp.mapping.scroll_docs(-4),
                 }),
+
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
+                    -- { name = "symfony" },
                 }, {
                     { name = "buffer" },
                     { name = "path", options = { trailing_slash = false } },
@@ -53,6 +55,14 @@ return {
                         maxwidth = function() return math.floor(0.65 * vim.o.columns) end,
                         ellipsis_char = "...",
                         show_labelDetails = true,
+                        menu = {
+                            nvim_lsp = "[LSP]",
+                            luasnip = "[Snippets]",
+                            -- symfony = "[Symfony]",
+                            buffer = "[Buffer]",
+                            path = "[Path]",
+                            rg = "[Grep]",
+                        },
                     }),
                 },
             }))
