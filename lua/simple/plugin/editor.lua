@@ -15,11 +15,11 @@ return {
 
             local functions = require("nvim-next.builtins.functions")
             local f_backward, f_forward = move.make_repeatable_pair(functions.F, functions.f)
-            vim.keymap.set("n", "F", f_backward)
-            vim.keymap.set("n", "f", f_forward)
+            vim.keymap.set({ "n", "x" }, "F", f_backward)
+            vim.keymap.set({ "n", "x" }, "f", f_forward)
             local t_backward, t_forward = move.make_repeatable_pair(functions.T, functions.t)
-            vim.keymap.set("n", "T", t_backward)
-            vim.keymap.set("n", "t", t_forward)
+            vim.keymap.set({ "n", "x" }, "T", t_backward)
+            vim.keymap.set({ "n", "x" }, "t", t_forward)
 
             -- stylua: ignore start
             local diagnostic = require("nvim-next.integrations").diagnostic()
