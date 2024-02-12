@@ -11,6 +11,7 @@ return {
             "hrsh7th/cmp-path",
             "lukas-reineke/cmp-rg",
             "saadparwaiz1/cmp_luasnip",
+            { "fbuchlak/cmp-symfony-router", dependencies = { "nvim-lua/plenary.nvim" } },
         },
         opts = {
             enabled = function() return vim.b.cmp_enabled ~= false and vim.bo.buftype ~= "prompt" end,
@@ -42,8 +43,8 @@ return {
                 sources = cmp.config.sources({
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    -- { name = "symfony" },
                 }, {
+                    { name = "symfony_router" },
                     { name = "buffer" },
                     { name = "path", options = { trailing_slash = false } },
                 }, {
@@ -58,7 +59,7 @@ return {
                         menu = {
                             nvim_lsp = "[LSP]",
                             luasnip = "[Snippets]",
-                            -- symfony = "[Symfony]",
+                            symfony_router = "[Symfony]",
                             buffer = "[Buffer]",
                             path = "[Path]",
                             rg = "[Grep]",
