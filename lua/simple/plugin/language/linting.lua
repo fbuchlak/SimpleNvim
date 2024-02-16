@@ -2,7 +2,7 @@ local linters_by_ft = {
     twig = { "twigcs", "djlint" },
     markdown = { "markdownlint" },
     dockerfile = { "hadolint" },
-    -- make = { "checkmake" },
+    make = { "checkmake" },
 }
 
 ---@param fts string[]
@@ -58,7 +58,7 @@ return {
                         "analyse",
                         function()
                             local cfgs = { "phpstan.neon", "phpstan.neon.dist", "phpstan.dist.neon" }
-                            if require("simple.util").has_root_file(cfgs) then return "" end
+                            if require("simple.util").has_root_file(cfgs) then return nil end
                             return "--level=6"
                         end,
                         "--error-format=json",

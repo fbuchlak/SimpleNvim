@@ -44,9 +44,14 @@ return {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                 }, {
-                    { name = "symfony_router" },
+                    {
+                        name = "symfony_router",
+                        option = {
+                            console_command = vim.g.symfony_console_command or { "php", "bin/console" },
+                        },
+                    },
                     { name = "buffer" },
-                    { name = "path", options = { trailing_slash = false } },
+                    { name = "path", option = { trailing_slash = false } },
                 }, {
                     { name = "rg", keyword_length = 3 },
                 }),
