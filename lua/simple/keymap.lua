@@ -11,7 +11,6 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-f>", "<C-f>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
-vim.keymap.set("x", "<Leader>p", [["_dP]])
 vim.keymap.set({ "n", "x" }, "<Leader>D", [["_D]])
 vim.keymap.set({ "n", "x" }, "<Leader>d", [["_d]])
 vim.keymap.set({ "n", "x" }, "<Leader>X", [["_X]])

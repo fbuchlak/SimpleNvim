@@ -187,7 +187,16 @@ return {
         "nvim-lualine/lualine.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
-            { "SmiteshP/nvim-navic", opts = { highlight = true, lsp = { auto_attach = true } } },
+            {
+                "SmiteshP/nvim-navic",
+                opts = {
+                    highlight = true,
+                    lsp = {
+                        auto_attach = true,
+                        preference = { "twig_language_server" },
+                    },
+                },
+            },
         },
         event = "VeryLazy",
         opts = {
