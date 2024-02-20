@@ -36,3 +36,5 @@ vim.keymap.set("n", "<C-Down>", "<CMD>resize -1<CR>", { desc = "[Pane][Resize] T
 
 vim.keymap.set("n", "<Leader>ld", vim.diagnostic.open_float, { desc = "Show diagnostic" })
 vim.keymap.set("n", "<LocalLeader>md", require("simple.util.diagnostic").toggle, { desc = "Toggle diag" })
+-- stylua: ignore
+vim.keymap.set("n", "<LocalLeader>mi", function() vim.lsp.inlay_hint.enable(0, not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle inlay hint" })

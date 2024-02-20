@@ -55,8 +55,8 @@ return {
         cmd = { "TodoTelescope", "TodoNext", "TodoPrev" },
         opts = {
             signs = false,
-            highlight = { pattern = [[.*<(KEYWORDS)($|\s|:|\d)]] },
-            search = { pattern = [[\b(KEYWORDS)($|\s|:|\d)]] },
+            highlight = { pattern = vim.g.simple_todo_comments_highlight or nil },
+            search = { pattern = vim.g.simple_todo_comments_highlight or nil },
         },
         keys = {
             { "<Leader>st", "<CMD>TodoTelescope<CR>", desc = "[Search] Todo Comments" },

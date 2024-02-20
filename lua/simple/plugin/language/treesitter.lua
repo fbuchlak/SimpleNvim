@@ -9,7 +9,7 @@ return {
             -- stylua: ignore
             ensure_installed = {
                 "markdown", "markdown_inline",
-                "bash", "diff", "make", "regex", "query", "gitignore", "ini", "dockerfile",
+                "bash", "diff", "make", "regex", "query", "tmux", "gitignore", "ini", "dockerfile",
                 "json", "json5", "jsonc", "toml", "xml", "yaml",
                 "sql",
                 "html", "css", "scss",

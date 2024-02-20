@@ -58,7 +58,10 @@ local servers = {
         end,
     },
     stimulus_ls = { filetypes = { "php", "twig", "blade" } },
-    twig_language_server = { cmd = { "twiggy-language-server", "--stdio" } },
+    twig_language_server = {
+        cmd = { "twiggy-language-server", "--stdio" },
+        filetypes = { "twig" },
+    },
 
     pyright = {},
     ruff_lsp = {},
