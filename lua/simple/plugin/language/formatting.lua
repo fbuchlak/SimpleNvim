@@ -1,7 +1,7 @@
 local util = require("simple.util.format")
 
 local formatters_by_ft = {
-    twig = { "djlint" },
+    twig = { "twig-cs-fixer", "djlint" },
     blade = { "blade-formatter" },
     dockerfile = { "dockfmt" },
     python = { "black" },
