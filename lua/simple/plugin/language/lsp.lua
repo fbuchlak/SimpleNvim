@@ -44,7 +44,7 @@ local servers = {
 
     clangd = {},
 
-    gopls = {},
+    gopls = require("simple.plugin.language.config.lsp.gopls"),
     templ = {},
 
     rust_analyzer = {},
@@ -58,10 +58,7 @@ local servers = {
         end,
     },
     stimulus_ls = { filetypes = { "php", "twig", "blade" } },
-    twig_language_server = {
-        cmd = { "twiggy-language-server", "--stdio" },
-        filetypes = { "twig" },
-    },
+    twiggy_language_server = {},
 
     pyright = {},
     ruff_lsp = {},

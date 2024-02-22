@@ -193,7 +193,7 @@ return {
                     highlight = true,
                     lsp = {
                         auto_attach = true,
-                        preference = { "twig_language_server" },
+                        preference = { "twiggy_language_server" },
                     },
                 },
             },
