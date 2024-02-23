@@ -5,6 +5,26 @@ return {
         keys = { { "gS", desc = "Split Join Toggle", mode = { "n", "x" } } },
     },
     {
+        "echasnovski/mini.ai",
+        keys = {
+            { "a", mode = { "x", "o" } },
+            { "i", mode = { "x", "o" } },
+        },
+        opts = {
+            mappings = {
+                around = "a",
+                inside = "i",
+                around_next = "",
+                inside_next = "",
+                around_last = "",
+                inside_last = "",
+                goto_left = "",
+                goto_right = "",
+            },
+            n_lines = 100,
+        },
+    },
+    {
         "echasnovski/mini.surround",
         opts = {
             mappings = {
@@ -28,6 +48,21 @@ return {
             { "gsi", function() return "gsai" end, desc = "[Surround] In", mode = "n", remap = true, expr = true },
             { "gsw", function() return "gsaiw" end, desc = "[Surround] In w", mode = "n", remap = true, expr = true },
             { "gsW", function() return "gsaiW" end, desc = "[Surround] In W", mode = "n", remap = true, expr = true },
+        },
+    },
+    {
+        "echasnovski/mini.operators",
+        keys = {
+            { "<Leader>gr", mode = { "n", "v" } },
+            { "<Leader>gs", mode = { "n", "v" } },
+            { "<Leader>gx", mode = { "n", "v" } },
+        },
+        opts = {
+            exchange = { prefix = "<Leader>gx" },
+            replace = { prefix = "<Leader>gr" },
+            sort = { prefix = "<Leader>gs" },
+            evaluate = { prefix = "" },
+            multiply = { prefix = "" },
         },
     },
     {

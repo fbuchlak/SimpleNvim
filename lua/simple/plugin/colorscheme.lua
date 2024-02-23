@@ -7,6 +7,8 @@ return {
             opts = { flavour = "mocha" },
             integrations = {
                 cmp = true,
+                dap = true,
+                dap_ui = true,
                 fidget = true,
                 gitsigns = true,
                 illuminate = { enabled = true, lsp = false },
@@ -31,6 +33,7 @@ return {
                     inlay_hints = { background = true },
                 },
                 navic = { enabled = true, custom_bg = "lualine" },
+                overseer = true,
                 telescope = { enabled = true },
                 treesitter = true,
                 which_key = true,

@@ -1,11 +1,11 @@
 vim.opt.exrc = true
-vim.opt.sessionoptions = { "buffers", "curdir", "skiprtp" }
+vim.opt.sessionoptions = { "buffers", "curdir", "help", "tabpages", "winsize", "terminal", "skiprtp" }
 vim.opt.compatible = false
 vim.opt.timeout = true
 vim.opt.timeoutlen = 300
 vim.opt.updatetime = 100
 vim.opt.guicursor = ""
-vim.opt.showmode = true
+vim.opt.showmode = false
 vim.opt.mouse = ""
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -21,7 +21,7 @@ vim.opt.backspace = "indent,eol,nostop"
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignore = ".git,*.o"
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.smartcase = true

@@ -47,7 +47,7 @@ return {
                         "lint",
                         "--format=json",
                         function()
-                            local dialect = vim.b.simple_sqlfluff_dialect or vim.g.simple_sqlfluff_dialect
+                            local dialect = vim.b.simple_config_sqlfluff_dialect or vim.g.simple_config_sqlfluff_dialect
                             if not dialect and "mysql" == vim.bo.filetype then dialect = "mysql" end
                             return ("--dialect=%s"):format(dialect or "ansi")
                         end,
@@ -59,10 +59,13 @@ return {
                         function()
                             local cfgs = { "phpstan.neon", "phpstan.neon.dist", "phpstan.dist.neon" }
                             if require("simple.util").has_root_file(cfgs) then return nil end
-                            return "--level=6"
+                            return ("--level=%d"):format(vim.g.simple_config_lint_phpstan_level)
                         end,
                         "--error-format=json",
                         "--no-progress",
+                    },
+                    __conditions = {
+                        function() return true ~= vim.g.simple_config_lint_phpstan_disabled end,
                     },
                 },
                 phpinsights = {
@@ -92,6 +95,8 @@ return {
         end,
         init = function()
             vim.api.nvim_create_user_command("Lint", function()
+                if vim.diagnostic.is_disabled() then return end
+
                 local ft = vim.bo.filetype
 
                 local lint = require("lint")

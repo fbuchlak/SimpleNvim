@@ -47,7 +47,7 @@ return {
                     {
                         name = "symfony_router",
                         option = {
-                            console_command = vim.g.symfony_console_command or { "php", "bin/console" },
+                            console_command = vim.g.simple_config_symfony_console_command or { "php", "bin/console" },
                         },
                     },
                     { name = "buffer" },

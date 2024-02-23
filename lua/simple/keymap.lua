@@ -1,3 +1,4 @@
+vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<LocalLeader>q", "<CMD>close<CR>")
 vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<CMD>w<CR>")
@@ -24,6 +25,7 @@ vim.keymap.set("i", ";", ";<c-g>u")
 
 vim.keymap.set("i", "<C-a>", "<c-o>I")
 vim.keymap.set("i", "<C-e>", "<c-o>A")
+vim.keymap.set("i", "<C-r><C-f>", "<C-r>=expand('%:t:r')<CR>")
 
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "[Pane] Left" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "[Pane] Down" })

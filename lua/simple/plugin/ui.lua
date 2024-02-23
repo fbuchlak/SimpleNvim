@@ -1,11 +1,14 @@
 local icons = require("simple.config.icons")
 local Icon = icons.common
-local lualine_diag_icons = { ["error"] = icons.diagnostic.Error, ["warning"] = icons.diagnostic.Warn }
+local bufferline_diag_icons = { ["error"] = icons.diagnostic.Error, ["warning"] = icons.diagnostic.Warn }
 
 return {
     {
         "stevearc/dressing.nvim",
-        opts = { select = { telescope = {} } },
+        opts = {
+            input = { insert_only = false, border = "single" },
+            select = { telescope = {} },
+        },
         init = function()
             ---@diagnostic disable-next-line: duplicate-set-field
             vim.ui.select = function(...)
@@ -28,6 +31,7 @@ return {
                 ["<Leader>e"] = "[Filesystem]",
                 ["<Leader>g"] = "[Action]",
                 ["<Leader>l"] = "[Show Details]",
+                ["<Leader>r"] = "[Run]",
                 ["<Leader>s"] = "[Search]",
                 ["<Leader>S"] = "[Search][Relative]",
                 ["<Leader>sa"] = "[Search][All]",
@@ -41,6 +45,8 @@ return {
                 ["<Leader>Sx"] = "[Search][Relative][All][Interactive]",
                 ["<LocalLeader>b"] = "[Buf]",
                 ["<LocalLeader>bq"] = "[Bufferline] Close",
+                ["<LocalLeader>d"] = { name = "[DAP]", mode = { "n", "x" } },
+                ["<LocalLeader>f"] = { name = "[Format]", mode = { "n", "x" } },
                 ["<LocalLeader>g"] = "[Git]",
                 ["<LocalLeader>gm"] = "[Git][Toggle]",
                 ["<LocalLeader>m"] = "[Toggle]",
@@ -55,8 +61,8 @@ return {
         cmd = { "TodoTelescope", "TodoNext", "TodoPrev" },
         opts = {
             signs = false,
-            highlight = { pattern = vim.g.simple_todo_comments_highlight or nil },
-            search = { pattern = vim.g.simple_todo_comments_highlight or nil },
+            highlight = { pattern = vim.g.simple_config_todo_highlight_pattern or nil },
+            search = { pattern = vim.g.simple_config_todo_search_pattern or nil },
         },
         keys = {
             { "<Leader>st", "<CMD>TodoTelescope<CR>", desc = "[Search] Todo Comments" },
@@ -174,7 +180,7 @@ return {
                     { filetype = "spectre_panel", text = "Spectre", text_align = "center", separator = true },
                     { filetype = "DiffviewFiles", text = "Diffview Files", text_align = "center", separator = true },
                 },
-                diagnostics_indicator = function(_, level) return lualine_diag_icons[level] or "" end,
+                diagnostics_indicator = function(_, level) return bufferline_diag_icons[level] or "" end,
             },
         },
         config = function(_, opts)

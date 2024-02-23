@@ -5,6 +5,7 @@ local formatters_by_ft = {
     blade = { "blade-formatter" },
     dockerfile = { "dockfmt" },
     python = { "black" },
+    go = { "goimports", "gofumpt" },
 }
 
 ---@param fts string[]
@@ -41,8 +42,9 @@ return {
                 "prettier",
                 "easy-coding-standard", "php-cs-fixer",
                 "black",
+                "goimports", "gofumpt",
                 "djlint", "blade-formatter",
-                "rustywind"
+                "rustywind",
             })
             return opts
         end,

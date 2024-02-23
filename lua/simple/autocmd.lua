@@ -22,6 +22,7 @@ vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("SimpleBufferCloseMap", { clear = true }),
     pattern = {
         "checkhealth",
+        "dap-float",
         "fugitive",
         "fugitiveblame",
         "help",

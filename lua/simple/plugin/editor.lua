@@ -116,7 +116,10 @@ return {
                 vim.cmd.close()
                 vim.api.nvim_create_autocmd("User", {
                     pattern = "MiniStarterOpened",
-                    callback = function() require("lazy").show() end,
+                    callback = function()
+                        require("lazy").show()
+                        vim.cmd("DotfyleGenerate")
+                    end,
                     once = true,
                 })
             end

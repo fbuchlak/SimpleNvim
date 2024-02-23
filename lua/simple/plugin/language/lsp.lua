@@ -49,14 +49,6 @@ local servers = {
 
     rust_analyzer = {},
 
-    phpactor = {
-        filetypes = { "php", "phtml" },
-        on_attach = function(_, buffer)
-            local map = vim.keymap.set
-            map("n", "<Leader>go", "<CMD>PhpActor navigate<CR>", { desc = "[PHP Actor] Navigate", buffer = buffer })
-            map("n", "<Leader>gp", "<CMD>PhpActor context_menu<CR>", { desc = "[PHP Actor] Menu", buffer = buffer })
-        end,
-    },
     stimulus_ls = { filetypes = { "php", "twig", "blade" } },
     twiggy_language_server = {},
 
@@ -70,10 +62,12 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-            "folke/neoconf.nvim",
+            { "williamboman/mason.nvim" },
+            { "williamboman/mason-lspconfig.nvim" },
+            { "folke/neoconf.nvim", opts = {} },
             { "folke/neodev.nvim", opts = {} },
+            { "gbprod/phpactor.nvim" },
+            { "zeioth/garbage-day.nvim", opts = {} },
         },
         event = { "BufReadPost", "BufNewFile", "VeryLazy" },
         keys = {
@@ -86,7 +80,6 @@ return {
             { "<Leader>slw", "<CMD>Telescope lsp_dynamic_workspace_symbols<CR>", desc = "[LSP] Workspace Symbols" },
         },
         config = function()
-            require("neoconf").setup({})
             require("simple.util.diagnostic").reset()
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -138,11 +131,17 @@ return {
         opts = function(_, opts)
             opts = opts or {}
             opts.ensure_installed = opts.ensure_installed or {}
+
             vim.list_extend(opts.ensure_installed, { "gh", "jq", "yq", "shellcheck" })
+
+            -- Ignore present executables
+            -- NOTE: This does not filter tools if executable differs from package name (e.g. "delve"-s executable is "dlv")
             opts.ensure_installed = vim.tbl_filter(
                 function(executable) return 0 == vim.fn.executable(executable) end,
                 opts.ensure_installed
             )
+            opts.PATH = "append" -- prefer system executables
+
             return vim.tbl_deep_extend("force", opts or {}, {
                 ui = {
                     icons = {
@@ -186,13 +185,24 @@ return {
     {
         "gbprod/phpactor.nvim",
         cmd = "PhpActor",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = { install = {}, lsp_config = { enabled = false } },
-        config = function(_, opts)
-            local install_path = require("mason-registry").get_package("phpactor"):get_install_path()
-            opts.install.bin = ("%s/bin/phpactor"):format(install_path)
-
-            require("phpactor").setup(opts)
-        end,
+        filetype = { "php", "phtml" },
+        build = ":PhpActor update",
+        dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+        opts = {
+            install = { check_on_startup = "daily" },
+            lspconfig = {
+                enabled = true,
+                options = {
+                    filetypes = { "php", "phtml" },
+                    on_attach = function(_, buffer)
+                        -- stylua: ignore start
+                        vim.keymap.set("n", "<Leader>go", "<CMD>PhpActor navigate<CR>", { desc = "[PHP Actor] Navigate", buffer = buffer })
+                        vim.keymap.set("n", "<Leader>gp", "<CMD>PhpActor context_menu<CR>", { desc = "[PHP Actor] Menu", buffer = buffer })
+                        vim.keymap.set("n", "<Leader>gc", "<CMD>PhpActor copy_fcqn<CR>", { desc = "[PHP Actor] Yank Namespace", buffer = buffer })
+                        -- stylua: ignore end
+                    end,
+                },
+            },
+        },
     },
 }
