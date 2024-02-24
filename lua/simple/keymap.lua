@@ -1,4 +1,3 @@
-vim.keymap.set("n", "<Esc>", vim.cmd.nohlsearch)
 vim.keymap.set("i", "<C-c>", "<Esc>")
 vim.keymap.set("n", "<LocalLeader>q", "<CMD>close<CR>")
 vim.keymap.set({ "n", "v", "i" }, "<C-s>", "<CMD>w<CR>")

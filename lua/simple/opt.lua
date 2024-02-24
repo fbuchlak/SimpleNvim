@@ -21,7 +21,7 @@ vim.opt.backspace = "indent,eol,nostop"
 vim.opt.wildmode = "longest:full,full"
 vim.opt.wildignore = ".git,*.o"
 
-vim.opt.hlsearch = true
+vim.opt.hlsearch = false
 vim.opt.ignorecase = true
 vim.opt.incsearch = true
 vim.opt.smartcase = true
