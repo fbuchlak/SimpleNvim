@@ -84,12 +84,14 @@ return {
                 ["<C-i>"] = actions.cycle_history_next,
                 ["<C-o>"] = actions.cycle_history_prev,
                 ["<C-t>"] = actions.complete_tag,
-                ["<C-h>"] = actions.preview_scrolling_left,
                 ["<C-j>"] = actions.preview_scrolling_down,
                 ["<C-k>"] = actions.preview_scrolling_up,
-                ["<C-l>"] = actions.preview_scrolling_right,
-                ["<C-a>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-f>"] = actions.send_selected_to_qflist + actions.open_qflist,
                 ["<C-y>"] = yank_entry,
+                ["<C-h>"] = false,
+                ["<C-l>"] = false,
+                ["<C-a>"] = false,
+                ["<C-e>"] = false,
             }
             local defaults = require("telescope.themes").get_dropdown({
                 buffer_previewer_maker = function(path, bufnr, preview_opts)

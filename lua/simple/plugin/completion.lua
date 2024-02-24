@@ -113,7 +113,7 @@ return {
             { "<Tab>", function() require("luasnip").jump(1) end, mode = "s" },
             { "<S-Tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
             {
-                "<C-e>",
+                "<C-q>",
                 function()
                     if require("luasnip").choice_active() then require("luasnip").change_choice(1) end
                 end,
