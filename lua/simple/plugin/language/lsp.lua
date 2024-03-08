@@ -50,7 +50,17 @@ local servers = {
     rust_analyzer = {},
 
     stimulus_ls = { filetypes = { "php", "twig", "blade" } },
-    twiggy_language_server = {},
+    twiggy_language_server = function()
+        return {
+            settings = {
+                twiggy = {
+                    phpBinConsoleCommand = "table" == type(vim.g.simple_config_symfony_console_command)
+                            and table.concat(vim.g.simple_config_symfony_console_command, " ")
+                        or nil,
+                },
+            },
+        }
+    end,
 
     pyright = {},
     ruff_lsp = {},
@@ -103,7 +113,9 @@ return {
             local default_server_opts = { capabilities = vim.deepcopy(capabilities or {}) }
 
             local function setup(server_name)
-                local server_opts = vim.tbl_deep_extend("force", default_server_opts, servers[server_name] or {})
+                local server = servers[server_name] or {}
+                if "function" == type(server) then server = server() end
+                local server_opts = vim.tbl_deep_extend("force", default_server_opts, server)
                 require("lspconfig")[server_name].setup(server_opts)
             end
 
