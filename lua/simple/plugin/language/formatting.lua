@@ -21,6 +21,7 @@ add_formatter_group({ "sh", "bash", "zsh" }, { "beautysh", "shellharden" })
 add_formatter_group({ "sql", "mysql" }, { "sqlfluff" })
 add_formatter_group({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
 add_formatter_group({ "lua" }, { "stylua" })
+add_formatter_group({ "terraform", "tf", "terraform-vars" }, { "terraform_fmt" })
 -- stylua: ignore
 add_formatter_group({
     "html", "css", "sass", "scss", "less",

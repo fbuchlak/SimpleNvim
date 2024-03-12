@@ -9,17 +9,18 @@ return {
             -- stylua: ignore
             ensure_installed = {
                 "markdown", "markdown_inline",
-                "bash", "diff", "make", "regex", "query", "tmux", "gitignore", "ini", "dockerfile",
+                "bash", "diff", "make", "regex", "query", "tmux", "gitignore", "ini", "dockerfile", "printf",
                 "json", "json5", "jsonc", "toml", "xml", "yaml",
                 "sql",
                 "html", "css", "scss",
-                "javascript", "jsdoc", "typescript", "tsx", "svelte", "vue",
+                "javascript", "jsdoc", "typescript", "tsx", "svelte", "vue", "angular",
                 "lua", "luap", "luadoc", "vim", "vimdoc",
                 "c", "cpp",
                 "go", "gomod", "gowork", "gosum", "templ",
                 "rust", "ron",
                 "php", "phpdoc", "twig",
                 "python", "requirements", "ninja",
+                "terraform", "hcl"
             },
             indent = { enable = true },
             highlight = { enable = true },

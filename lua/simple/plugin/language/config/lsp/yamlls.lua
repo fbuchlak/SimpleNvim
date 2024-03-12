@@ -10,6 +10,10 @@ return {
             keyOrdering = false,
             schemaStore = { enable = false, url = "" },
             validate = true,
+            customTags = {
+                "!php/enum",
+                "!php/const",
+            },
         },
     },
 }

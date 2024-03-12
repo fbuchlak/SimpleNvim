@@ -15,7 +15,8 @@ end
 
 set_linters({ "css", "less", "sass", "scss" }, { "stylelint" })
 set_linters({ "sql", "mysql" }, { "sqlfluff" })
-set_linters({ "php", "phtml" }, { "php", "phpstan", "phpinsights" })
+set_linters({ "php", "phtml" }, { "php", "phpstan", "phpinsights", "phpcs", "phpmd" })
+set_linters({ "terraform", "tf" }, { "terraform_validate" })
 
 return {
     {
@@ -65,12 +66,25 @@ return {
                         "--no-progress",
                     },
                     __conditions = {
-                        function() return true ~= vim.g.simple_config_lint_phpstan_disabled end,
+                        function() return true ~= vim.g.simple_config_lint_phpstan_enabled end,
                     },
                 },
                 phpinsights = {
                     __conditions = {
-                        function() return require("simple.util").has_root_file({ "phpinsights.php" }) end,
+                        function()
+                            return true == vim.g.simple_config_lint_phpinsights_enabled
+                                and require("simple.util").has_root_file({ "phpinsights.php" })
+                        end,
+                    },
+                },
+                phpcs = {
+                    __conditions = {
+                        function() return true == vim.g.simple_config_lint_phpcs_enabled end,
+                    },
+                },
+                phpmd = {
+                    __conditions = {
+                        function() return true == vim.g.simple_config_lint_phpcs_enabled end,
                     },
                 },
             },

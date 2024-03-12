@@ -39,6 +39,7 @@ local servers = {
     tsserver = { completions = { completeFunctionCalls = true } },
     svelte = {},
     volar = {}, -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+    angularls = {},
 
     lua_ls = { settings = { Lua = { workspace = { checkThirdParty = false } } } },
 
@@ -64,6 +65,8 @@ local servers = {
 
     pyright = {},
     ruff_lsp = {},
+
+    terraformls = {},
 }
 
 return {
