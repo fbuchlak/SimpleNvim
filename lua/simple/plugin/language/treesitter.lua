@@ -18,7 +18,7 @@ return {
                 "c", "cpp",
                 "go", "gomod", "gowork", "gosum", "templ",
                 "rust", "ron",
-                "php", "phpdoc", "twig",
+                "php", "php_only", "phpdoc", "twig", "blade",
                 "python", "requirements", "ninja",
                 "terraform", "hcl"
             },
@@ -129,6 +129,21 @@ return {
             },
         },
         config = function(_, opts)
+            local configs = require("nvim-treesitter.parsers").get_parser_configs()
+            configs.blade = {
+                install_info = {
+                    url = "https://github.com/EmranMR/tree-sitter-blade",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+                filetype = "blade",
+            }
+            vim.filetype.add({
+                pattern = {
+                    [".*%.blade%.php"] = "blade",
+                },
+            })
+
             require("nvim-next.integrations").treesitter_textobjects()
             require("nvim-treesitter.configs").setup(opts)
         end,
