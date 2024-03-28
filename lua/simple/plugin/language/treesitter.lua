@@ -154,11 +154,15 @@ return {
     },
     {
         "overleaf/vim-env-syntax",
-        event = { "BufNew", "BufReadPre" },
+        event = { "BufNew", "BufRead", "BufEnter" },
         init = function()
-            vim.api.nvim_create_autocmd({ "BufNew", "BufReadPre" }, {
+            vim.api.nvim_create_autocmd({ "BufNew", "BufRead", "BufEnter" }, {
+                group = vim.api.nvim_create_augroup("SimpleEnvFt", { clear = true }),
                 pattern = ".env*",
-                command = "set filetype=env",
+                callback = function(args)
+                    vim.cmd("set ft=env")
+                    vim.diagnostic.disable(args.buf)
+                end,
             })
         end,
     },

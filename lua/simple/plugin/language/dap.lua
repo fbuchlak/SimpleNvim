@@ -13,7 +13,7 @@ return {
     {
         "mfussenegger/nvim-dap",
         dependencies = {
-            { "rcarriga/nvim-dap-ui", opts = {} },
+            { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" }, opts = {} },
             { "theHamsta/nvim-dap-virtual-text", opts = {} },
             { "leoluz/nvim-dap-go", opts = {} },
             {

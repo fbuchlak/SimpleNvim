@@ -11,6 +11,7 @@ return {
             "hrsh7th/cmp-path",
             "lukas-reineke/cmp-rg",
             "saadparwaiz1/cmp_luasnip",
+            "luckasRanarison/tailwind-tools.nvim",
             { "fbuchlak/cmp-symfony-router", dependencies = { "nvim-lua/plenary.nvim" } },
         },
         opts = {
@@ -69,6 +70,7 @@ return {
                             path = "[Path]",
                             rg = "[Grep]",
                         },
+                        before = require("tailwind-tools.cmp").lspkind_format,
                     }),
                 },
             }))

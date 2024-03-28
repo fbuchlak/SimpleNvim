@@ -225,4 +225,14 @@ return {
             },
         },
     },
+    {
+        "luckasRanarison/tailwind-tools.nvim",
+        event = "BufReadPost",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        cmd = { "TailwindSort", "TailwindSortSelection", "TailwindColorToggle", "TailwindConcealToggle" },
+        opts = {
+            document_color = { enabled = true },
+            conceal = { enabled = true },
+        },
+    },
 }
