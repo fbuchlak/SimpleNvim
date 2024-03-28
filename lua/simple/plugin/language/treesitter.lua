@@ -152,4 +152,14 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
     },
+    {
+        "overleaf/vim-env-syntax",
+        event = { "BufNew", "BufReadPre" },
+        init = function()
+            vim.api.nvim_create_autocmd({ "BufNew", "BufReadPre" }, {
+                pattern = ".env*",
+                command = "set filetype=env",
+            })
+        end,
+    },
 }

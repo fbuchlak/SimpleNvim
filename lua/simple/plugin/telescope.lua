@@ -96,7 +96,7 @@ return {
             local defaults = require("telescope.themes").get_dropdown({
                 buffer_previewer_maker = function(path, bufnr, preview_opts)
                     preview_opts = preview_opts or {}
-                    if preview_opts.use_ft_detect == nil then preview_opts.use_ft_detect = true end
+                    if preview_opts.use_ft_detect == nil then preview_opts.use_ft_detect = false end
                     preview_opts.use_ft_detect = true == preview_opts.use_ft_detect
                         or not require("simple.util").has_min_bytes_per_line(path, 300)
                     return require("telescope.previewers").buffer_previewer_maker(path, bufnr, preview_opts)

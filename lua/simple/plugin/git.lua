@@ -44,6 +44,9 @@ return {
                 map({ "o", "x" }, "ac", ":<C-U>Gitsigns select_hunk<CR>", "Change")
             end,
         },
+        config = function(_, opts)
+            vim.schedule(function() require("gitsigns").setup(opts) end)
+        end,
         init = function()
             vim.api.nvim_create_user_command("NextHunk", function() require("gitsigns").next_hunk() end, {})
             vim.api.nvim_create_user_command("PrevHunk", function() require("gitsigns").prev_hunk() end, {})

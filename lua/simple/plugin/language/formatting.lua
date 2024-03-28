@@ -4,8 +4,10 @@ local formatters_by_ft = {
     twig = { "twig-cs-fixer", "djlint" },
     blade = { "blade-formatter" },
     dockerfile = { "dockfmt" },
+    lua = { "stylua" },
     python = { "black" },
     go = { "goimports", "gofumpt" },
+    xml = { "xmllint" },
 }
 
 ---@param fts string[]
@@ -17,10 +19,10 @@ local function add_formatter_group(fts, formatters)
     end
 end
 
-add_formatter_group({ "sh", "bash", "zsh" }, { "beautysh", "shellharden" })
+add_formatter_group({ "sh", "bash" }, { "shfmt", "beautysh", "shellharden" })
+add_formatter_group({ "zsh" }, { "beautysh", "shellharden" })
 add_formatter_group({ "sql", "mysql" }, { "sqlfluff" })
 add_formatter_group({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
-add_formatter_group({ "lua" }, { "stylua" })
 add_formatter_group({ "terraform", "tf", "terraform-vars" }, { "terraform_fmt" })
 -- stylua: ignore
 add_formatter_group({
@@ -38,7 +40,7 @@ return {
             opts.ensure_installed = opts.ensure_installed or {}
             -- stylua: ignore
             vim.list_extend(opts.ensure_installed, {
-                "beautysh", "shellharden",
+                "shfmt", "beautysh", "shellharden",
                 "sqlfluff",
                 "prettier",
                 "easy-coding-standard", "php-cs-fixer",

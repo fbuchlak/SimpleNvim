@@ -122,21 +122,24 @@ return {
                 require("lspconfig")[server_name].setup(server_opts)
             end
 
-            local ensure_installed = {}
-            local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
-            local servers_all = vim.tbl_keys(lspconfig_to_package) or {}
-            for server, _ in pairs(servers) do
-                if
-                    not vim.tbl_contains(servers_all, server)
-                    or 1 == vim.fn.executable(lspconfig_to_package[server])
-                then
-                    setup(server)
-                else
-                    ensure_installed[#ensure_installed + 1] = server
+            -- delay mason
+            vim.schedule(function()
+                local ensure_installed = {}
+                local lspconfig_to_package = require("mason-lspconfig.mappings.server").lspconfig_to_package
+                local servers_all = vim.tbl_keys(lspconfig_to_package) or {}
+                for server, _ in pairs(servers) do
+                    if
+                        not vim.tbl_contains(servers_all, server)
+                        or 1 == vim.fn.executable(lspconfig_to_package[server])
+                    then
+                        setup(server)
+                    else
+                        ensure_installed[#ensure_installed + 1] = server
+                    end
                 end
-            end
 
-            require("mason-lspconfig").setup({ ensure_installed = ensure_installed, handlers = { setup } })
+                require("mason-lspconfig").setup({ ensure_installed = ensure_installed, handlers = { setup } })
+            end)
         end,
     },
     {
@@ -170,19 +173,21 @@ return {
         config = function(_, opts)
             require("mason").setup(opts)
 
-            local registry = require("mason-registry")
-            local function ensure_installed()
-                for _, name in ipairs(opts.ensure_installed or {}) do
-                    local ok, package = pcall(registry.get_package, name)
-                    if ok then
-                        if not package:is_installed() then package:install() end
-                    else
-                        require("simple.util.notify").error(("There is no %q package in registry!"):format(name))
+            vim.schedule(function()
+                local registry = require("mason-registry")
+                local function ensure_installed()
+                    for _, name in ipairs(opts.ensure_installed or {}) do
+                        local ok, package = pcall(registry.get_package, name)
+                        if ok then
+                            if not package:is_installed() then package:install() end
+                        else
+                            require("simple.util.notify").error(("There is no %q package in registry!"):format(name))
+                        end
                     end
                 end
-            end
 
-            registry.refresh(ensure_installed)
+                registry.refresh(ensure_installed)
+            end)
         end,
     },
     {

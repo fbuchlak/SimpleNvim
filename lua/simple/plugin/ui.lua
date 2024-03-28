@@ -25,6 +25,7 @@ return {
     {
         "folke/which-key.nvim",
         event = "VeryLazy",
+        opts = { disable = { filetypes = { "TelescopePrompt", "vim" } } },
         config = function(_, opts)
             require("which-key").setup(opts)
             require("which-key").register({
@@ -70,11 +71,13 @@ return {
             { "]t", "<CMD>TodoNext<CR>", desc = "Next Todo" },
         },
         config = function(_, opts)
-            local todo = require("todo-comments")
-            local prev, next = require("nvim-next.move").make_repeatable_pair(todo.jump_prev, todo.jump_next)
-            vim.api.nvim_create_user_command("TodoNext", next, {})
-            vim.api.nvim_create_user_command("TodoPrev", prev, {})
-            todo.setup(opts)
+            vim.schedule(function()
+                local todo = require("todo-comments")
+                local prev, next = require("nvim-next.move").make_repeatable_pair(todo.jump_prev, todo.jump_next)
+                vim.api.nvim_create_user_command("TodoNext", next, {})
+                vim.api.nvim_create_user_command("TodoPrev", prev, {})
+                todo.setup(opts)
+            end)
         end,
     },
     {
@@ -82,20 +85,21 @@ return {
         event = { "BufReadPost", "BufNewFile" },
         opts = { only_in_normal_buffers = true },
         config = function(_, opts)
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "lazy", "mason" },
-                callback = function()
-                    vim.b.minitrailspace_disable = true
+            vim.schedule(function()
+                vim.api.nvim_create_user_command("MiniTrailspaceToggle", function()
+                    vim.b.minitrailspace_disable = not vim.b.minitrailspace_disable
                     require("mini.trailspace").highlight()
-                end,
-            })
-            require("mini.trailspace").setup(opts)
-        end,
-        init = function()
-            vim.api.nvim_create_user_command("MiniTrailspaceToggle", function()
-                vim.b.minitrailspace_disable = not vim.b.minitrailspace_disable
-                require("mini.trailspace").highlight()
-            end, {})
+                end, {})
+                vim.api.nvim_create_autocmd("FileType", {
+                    pattern = { "lazy", "mason" },
+                    callback = function()
+                        vim.b.minitrailspace_disable = true
+                        require("mini.trailspace").highlight()
+                    end,
+                })
+
+                require("mini.trailspace").setup(opts)
+            end)
         end,
     },
     {
@@ -111,21 +115,26 @@ return {
                 goto_bottom = "]i",
             },
         },
-        init = function()
-            vim.api.nvim_create_autocmd("FileType", {
-                pattern = { "help", "man", "lazy", "mason" },
-                callback = function() vim.b.miniindentscope_disable = true end,
-            })
+        config = function(_, opts)
+            vim.schedule(function()
+                vim.api.nvim_create_autocmd("FileType", {
+                    pattern = { "help", "man", "lazy", "mason" },
+                    callback = function() vim.b.miniindentscope_disable = true end,
+                })
+                require("mini.indentscope").setup(opts)
+            end)
         end,
     },
     {
         "lukas-reineke/indent-blankline.nvim",
-        main = "ibl",
         event = { "BufReadPost", "BufNewFile" },
         opts = {
             scope = { enabled = false },
             exclude = { filetypes = { "starter", "lazy", "mason" } },
         },
+        config = function(_, opts)
+            vim.schedule(function() require("ibl").setup(opts) end)
+        end,
     },
     {
         "RRethy/vim-illuminate",

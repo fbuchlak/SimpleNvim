@@ -6,7 +6,7 @@ return {
     { "AndrewRadev/bufferize.vim", cmd = "Bufferize" },
     {
         "ghostbuster91/nvim-next",
-        lazy = false,
+        event = { "BufReadPost", "BufNewFile" },
         opts = { default_mappings = { original = true } },
         config = function(_, opts)
             local next = require("nvim-next")

@@ -13,6 +13,7 @@ return {
         "uga-rosa/ccc.nvim",
         cmd = { "CccPick", "CccHighlighterToggle" },
         keys = { { "<LocalLeader>mc", "<CMD>CccHighlighterToggle<CR>", desc = "[Toggle] Color Highlight" } },
+        config = true,
     },
     {
         "kristijanhusak/vim-dadbod-ui",
@@ -25,6 +26,6 @@ return {
     },
     {
         "creativenull/dotfyle-metadata.nvim",
-        cmd = { "DotfyleGenerate", "DotfyleOpen" },
+        cmd = { "DotfyleGenerate" },
     },
 }

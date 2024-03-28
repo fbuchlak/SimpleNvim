@@ -5,6 +5,7 @@ return {
         priority = 1000,
         opts = {
             opts = { flavour = "mocha" },
+            default_integrations = false,
             integrations = {
                 cmp = true,
                 dap = true,
@@ -37,14 +38,6 @@ return {
                 telescope = { enabled = true },
                 treesitter = true,
                 which_key = true,
-
-                alpha = false,
-                dashboard = false,
-                flash = false,
-                neogit = false,
-                nvimtree = false,
-                rainbow_delimiters = false,
-                ufo = false,
             },
         },
     },
