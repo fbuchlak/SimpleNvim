@@ -141,7 +141,13 @@ return {
         },
         config = function(_, opts)
             vim.api.nvim_create_autocmd("User", {
-                group = vim.api.nvim_create_augroup("MiniFilesMapping", { clear = true }),
+                group = vim.api.nvim_create_augroup("SimpleTelescopeFindPreMiniFilesClose", { clear = true }),
+                pattern = "TelescopeFindPre",
+                callback = function() require("mini.files").close() end,
+            })
+
+            vim.api.nvim_create_autocmd("User", {
+                group = vim.api.nvim_create_augroup("SimpleMiniFilesMapping", { clear = true }),
                 pattern = "MiniFilesBufferCreate",
                 callback = function(args)
                     local minifiles = require("mini.files")
@@ -150,6 +156,33 @@ return {
                     vim.keymap.set("n", "<Esc>", minifiles.close, mopts)
                     vim.keymap.set("n", "<Leader>q", minifiles.close, mopts)
                     vim.keymap.set({ "n", "i", "v" }, "<C-s>", minifiles.synchronize, mopts)
+
+                    local mfdir = nil
+                    local T = require("simple.util.telescope")
+
+                    local set_tele_opts = function(tele_opts) tele_opts.cwd = mfdir end
+                    local telekeys = {
+                        ["<leader>ss"] = T.key(T.opts("s", "live_grep", set_tele_opts, nil, nil, true)),
+                        ["<leader>sf"] = T.key(T.opts("f", "find_files", set_tele_opts, nil, nil, true)),
+                    }
+
+                    for lhs, key in pairs(telekeys) do
+                        local mode = key.mode or "n"
+                        key.mode = nil
+                        key[1] = nil
+                        local rhs = key[2]
+                        key[2] = nil
+
+                        vim.keymap.set(mode, lhs, function()
+                            if not rhs then return end
+                            local ok, entry = pcall(minifiles.get_fs_entry, nil)
+                            if not ok or nil == entry then return end
+                            local ok_dir, dir = pcall(vim.fs.dirname, entry.path)
+                            if not ok_dir or nil == dir then return end
+                            mfdir = dir
+                            rhs()
+                        end, vim.tbl_extend("force", key, mopts))
+                    end
                 end,
             })
 

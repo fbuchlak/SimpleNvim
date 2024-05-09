@@ -80,7 +80,7 @@ return {
             { "folke/neoconf.nvim", opts = {} },
             { "folke/neodev.nvim", opts = {} },
             { "gbprod/phpactor.nvim" },
-            { "zeioth/garbage-day.nvim", opts = {} },
+            -- { "zeioth/garbage-day.nvim", opts = {} },
         },
         event = { "BufReadPost", "BufNewFile", "VeryLazy" },
         keys = {
@@ -205,7 +205,7 @@ return {
     {
         "gbprod/phpactor.nvim",
         cmd = "PhpActor",
-        filetype = { "php", "phtml" },
+        ft = { "php", "phtml" },
         build = ":PhpActor update",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
         opts = {
@@ -223,16 +223,6 @@ return {
                     end,
                 },
             },
-        },
-    },
-    {
-        "luckasRanarison/tailwind-tools.nvim",
-        event = "BufReadPost",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        cmd = { "TailwindSort", "TailwindSortSelection", "TailwindColorToggle", "TailwindConcealToggle" },
-        opts = {
-            document_color = { enabled = true },
-            conceal = { enabled = true },
         },
     },
 }

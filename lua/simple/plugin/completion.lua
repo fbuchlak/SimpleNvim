@@ -11,7 +11,6 @@ return {
             "hrsh7th/cmp-path",
             "lukas-reineke/cmp-rg",
             "saadparwaiz1/cmp_luasnip",
-            "luckasRanarison/tailwind-tools.nvim",
             { "fbuchlak/cmp-symfony-router", dependencies = { "nvim-lua/plenary.nvim" } },
         },
         opts = {
@@ -70,7 +69,6 @@ return {
                             path = "[Path]",
                             rg = "[Grep]",
                         },
-                        before = require("tailwind-tools.cmp").lspkind_format,
                     }),
                 },
             }))
@@ -107,18 +105,25 @@ return {
         opts = { history = false, delete_check_events = "TextChanged" },
         keys = {
             {
-                "<Tab>",
-                function() return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<Tab>" end,
-                expr = true,
-                mode = "i",
-            },
-            { "<Tab>", function() require("luasnip").jump(1) end, mode = "s" },
-            { "<S-Tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
-            {
                 "<C-q>",
                 function()
                     if require("luasnip").choice_active() then require("luasnip").change_choice(1) end
                 end,
+                mode = { "i", "s" },
+            },
+            {
+                "<C-h>",
+                function()
+                    if require("luasnip").locally_jumpable(-1) then require("luasnip").jump(-1) end
+                end,
+                mode = { "i", "s" },
+            },
+            {
+                "<C-l>",
+                function()
+                    if require("luasnip").expand_or_locally_jumpable() then require("luasnip").expand_or_jump() end
+                end,
+                expr = true,
                 mode = { "i", "s" },
             },
         },

@@ -61,6 +61,14 @@ return {
         end,
         config = function(_, opts)
             vim.api.nvim_create_autocmd("User", {
+                group = vim.api.nvim_create_augroup("SimpleTelescopeFindPreCloseFloatingWindow", { clear = true }),
+                pattern = "TelescopeFindPre",
+                callback = function()
+                    if vim.bo.filetype == "lazy" and require("simple.util").is_win_floating() then vim.cmd.close() end
+                end,
+            })
+
+            vim.api.nvim_create_autocmd("User", {
                 pattern = "TelescopePreviewerLoaded",
                 callback = function(args)
                     vim.wo.wrap = false
@@ -123,15 +131,6 @@ return {
 
             require("telescope").setup(opts)
             require("telescope").load_extension("fzf")
-        end,
-        init = function()
-            vim.api.nvim_create_autocmd("User", {
-                group = vim.api.nvim_create_augroup("SimpleTelescopeFindPreCloseFloating", { clear = true }),
-                pattern = "TelescopeFindPre",
-                callback = function()
-                    if vim.bo.filetype == "lazy" and require("simple.util").is_win_floating() then vim.cmd.close() end
-                end,
-            })
         end,
     },
 }

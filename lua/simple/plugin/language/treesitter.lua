@@ -1,7 +1,10 @@
 return {
     {
         "nvim-treesitter/nvim-treesitter",
-        dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "gbprod/php-enhanced-treesitter.nvim" },
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            -- "gbprod/php-enhanced-treesitter.nvim"
+        },
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile", "VeryLazy" },
         cmd = { "TSUpdate", "TSUpdateSync" },
@@ -10,6 +13,7 @@ return {
             ensure_installed = {
                 "markdown", "markdown_inline",
                 "bash", "diff", "make", "regex", "query", "tmux", "gitignore", "ini", "dockerfile", "printf",
+                "csv", "tsv",
                 "json", "json5", "jsonc", "toml", "xml", "yaml",
                 "sql",
                 "html", "css", "scss",
@@ -20,7 +24,7 @@ return {
                 "rust", "ron",
                 "php", "php_only", "phpdoc", "twig", "blade",
                 "python", "requirements", "ninja",
-                "terraform", "hcl"
+                "terraform", "hcl",
             },
             indent = { enable = true },
             highlight = { enable = true },
@@ -154,13 +158,13 @@ return {
     },
     {
         "overleaf/vim-env-syntax",
-        event = { "BufNew", "BufRead", "BufEnter" },
+        event = { "BufReadPost", "BufNewFile" },
         init = function()
-            vim.api.nvim_create_autocmd({ "BufNew", "BufRead", "BufEnter" }, {
+            vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
                 group = vim.api.nvim_create_augroup("SimpleEnvFt", { clear = true }),
                 pattern = ".env*",
                 callback = function(args)
-                    vim.cmd("set ft=env")
+                    vim.cmd("set filetype=env commentstring=#%s")
                     vim.diagnostic.disable(args.buf)
                 end,
             })

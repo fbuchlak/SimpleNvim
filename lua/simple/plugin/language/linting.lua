@@ -109,7 +109,7 @@ return {
         end,
         init = function()
             vim.api.nvim_create_user_command("Lint", function()
-                if vim.diagnostic.is_disabled() then return end
+                if not vim.diagnostic.is_enabled() then return end
 
                 local ft = vim.bo.filetype
 
