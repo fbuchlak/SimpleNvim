@@ -21,11 +21,7 @@ local diagnostic_config = {
 function M.reset() vim.diagnostic.config(vim.deepcopy(diagnostic_config)) end
 
 function M.toggle()
-    if vim.diagnostic.is_disabled() then
-        vim.diagnostic.enable()
-    else
-        vim.diagnostic.disable()
-    end
+    vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end
 
 return M

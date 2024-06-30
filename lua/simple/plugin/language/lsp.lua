@@ -67,6 +67,8 @@ local servers = {
     ruff_lsp = {},
 
     terraformls = {},
+
+    rnix = { filetypes = { "nix" } },
 }
 
 return {

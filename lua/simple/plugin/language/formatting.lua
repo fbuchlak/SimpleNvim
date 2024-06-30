@@ -8,6 +8,7 @@ local formatters_by_ft = {
     python = { "black" },
     go = { "goimports", "gofumpt" },
     xml = { "xmllint" },
+    nix = { "nixpkgs_fmt" },
 }
 
 ---@param fts string[]
@@ -48,6 +49,7 @@ return {
                 "goimports", "gofumpt",
                 "djlint", "blade-formatter",
                 "rustywind",
+                "nixpkgs-fmt",
             })
             return opts
         end,

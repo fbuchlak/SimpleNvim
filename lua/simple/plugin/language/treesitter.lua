@@ -3,7 +3,7 @@ return {
         "nvim-treesitter/nvim-treesitter",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
-            -- "gbprod/php-enhanced-treesitter.nvim"
+            "gbprod/php-enhanced-treesitter.nvim"
         },
         build = ":TSUpdate",
         event = { "BufReadPost", "BufNewFile", "VeryLazy" },
@@ -25,6 +25,7 @@ return {
                 "php", "php_only", "phpdoc", "twig", "blade",
                 "python", "requirements", "ninja",
                 "terraform", "hcl",
+                "nix",
             },
             indent = { enable = true },
             highlight = { enable = true },
@@ -165,7 +166,9 @@ return {
                 pattern = ".env*",
                 callback = function(args)
                     vim.cmd("set filetype=env commentstring=#%s")
-                    vim.diagnostic.disable(args.buf)
+                    vim.diagnostic.enable(false, {
+                        bufnr = args.buf,
+                    })
                 end,
             })
         end,
