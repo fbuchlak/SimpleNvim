@@ -6,6 +6,7 @@ return {
     { "AndrewRadev/bufferize.vim", cmd = "Bufferize" },
     {
         "ghostbuster91/nvim-next",
+        commit = "52bff3f4f5ede1790d3cff295b3b9c4561677415", -- see https://github.com/ghostbuster91/nvim-next/issues/24
         event = { "BufReadPost", "BufNewFile" },
         opts = { default_mappings = { original = true } },
         config = function(_, opts)

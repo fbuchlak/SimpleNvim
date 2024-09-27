@@ -36,7 +36,7 @@ local servers = {
         workingDirectories = { mode = "auto" },
         on_attach = function() vim.keymap.set("n", "<LocalLeader>fe", "<CMD>EslintFixAll<CR>", { desc = "Eslint Fix" }) end,
     },
-    tsserver = { completions = { completeFunctionCalls = true } },
+    ts_ls = { completions = { completeFunctionCalls = true } },
     svelte = {},
     volar = {}, -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
     angularls = {},

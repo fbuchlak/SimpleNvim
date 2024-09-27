@@ -13,20 +13,20 @@ local formatters_by_ft = {
 
 ---@param fts string[]
 ---@param formatters string[]
-local function add_formatter_group(fts, formatters)
+local function set_formatter_group(fts, formatters)
     for _, ft in pairs(fts) do
-        formatters_by_ft[ft] = formatters_by_ft[ft] or {}
-        table.insert(formatters_by_ft[ft], formatters)
+        formatters_by_ft[ft] = formatters
+        formatters_by_ft[ft].stop_after_first = true
     end
 end
 
-add_formatter_group({ "sh", "bash" }, { "shfmt", "beautysh", "shellharden" })
-add_formatter_group({ "zsh" }, { "beautysh", "shellharden" })
-add_formatter_group({ "sql", "mysql" }, { "sqlfluff" })
-add_formatter_group({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
-add_formatter_group({ "terraform", "tf", "terraform-vars" }, { "terraform_fmt" })
+set_formatter_group({ "sh", "bash" }, { "shfmt", "beautysh", "shellharden" })
+set_formatter_group({ "zsh" }, { "beautysh", "shellharden" })
+set_formatter_group({ "sql", "mysql" }, { "sqlfluff" })
+set_formatter_group({ "php", "phtml" }, { "easy-coding-standard", "php_cs_fixer" })
+set_formatter_group({ "terraform", "tf", "terraform-vars" }, { "terraform_fmt" })
 -- stylua: ignore
-add_formatter_group({
+set_formatter_group({
     "html", "css", "sass", "scss", "less",
     "javascript", "javascriptreact",
     "typescript", "typescriptreact",
