@@ -23,6 +23,28 @@ return {
         end,
     },
     {
+        "echasnovski/mini.icons",
+        config = function(_, opts)
+            opts.file = opts.file or {}
+            opts.extensions = opts.extensions or {}
+
+            for ext, hl in pairs({
+                [""] = "MiniIconsAzure",
+                [".dev"] = "MiniIconsGreen",
+                [".test"] = "MiniIconsYellow",
+                [".prod"] = "MiniIconsRed",
+            }) do
+                opts.file[(".env%s"):format(ext)] = { glyph = "󰒓", hl = hl }
+                opts.file[(".env%s.local"):format(ext)] = { glyph = "󰒓", hl = hl }
+            end
+
+            require("mini.icons").setup(opts)
+
+            if opts.tweak_lsp_kind then MiniIcons.tweak_lsp_kind() end
+            if opts.mock_nvim_web_devicons then MiniIcons.mock_nvim_web_devicons() end
+        end,
+    },
+    {
         "folke/which-key.nvim",
         event = "VeryLazy",
         opts = { disable = { filetypes = { "TelescopePrompt", "vim" } } },
@@ -165,7 +187,12 @@ return {
     },
     {
         "akinsho/bufferline.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = {
+            {
+                "echasnovski/mini.icons",
+                opts = { mock_nvim_web_devicons = true },
+            },
+        },
         event = "VeryLazy",
         keys = {
             { "H", "<CMD>BufferLineCyclePrev<CR>", desc = "[Bufferline] Prev" },
@@ -201,7 +228,10 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         dependencies = {
-            "nvim-tree/nvim-web-devicons",
+            {
+                "echasnovski/mini.icons",
+                opts = { mock_nvim_web_devicons = true },
+            },
             {
                 "SmiteshP/nvim-navic",
                 opts = {
