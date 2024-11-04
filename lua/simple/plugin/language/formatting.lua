@@ -61,6 +61,31 @@ return {
             formatters_by_ft = formatters_by_ft,
             formatters = {
                 rustywind = {},
+                ["easy-coding-standard"] = function()
+                    -- -- To run easy coding standard from container
+                    -- vim.g.simple_conform_ecs_command = "docker"
+                    -- vim.g.simple_conform_ecs_args = function(_, ctx)
+                    --     local cwd = vim.loop.cwd() or ""
+                    --     local relative = ctx.filename:sub(cwd:len() + 1)
+                    --     local filename = "/var/www/html" .. relative
+                    --
+                    --     return {
+                    --         "compose",
+                    --         "exec",
+                    --         "php",
+                    --         "vendor/bin/ecs",
+                    --         "check",
+                    --         filename,
+                    --         "--fix",
+                    --         "--no-interaction",
+                    --     }
+                    -- end
+
+                    return {
+                        command = vim.g.simple_conform_ecs_command,
+                        args = vim.g.simple_conform_ecs_args,
+                    }
+                end,
                 djlint = {
                     prepend_args = function()
                         if require("simple.util").has_root_file({ ".djlintrc" }) then return {} end

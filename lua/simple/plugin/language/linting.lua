@@ -66,7 +66,7 @@ return {
                         "--no-progress",
                     },
                     __conditions = {
-                        function() return true ~= vim.g.simple_config_lint_phpstan_enabled end,
+                        function() return true ~= vim.g.simple_config_lint_phpstan_disabled end,
                     },
                 },
                 phpinsights = {
