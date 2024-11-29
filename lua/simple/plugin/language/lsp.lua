@@ -64,11 +64,11 @@ local servers = {
     end,
 
     pyright = {},
-    ruff_lsp = {},
+    ruff = {},
 
     terraformls = {},
 
-    rnix = { filetypes = { "nix" } },
+    nil_ls = { filetypes = { "nix" } },
 }
 
 return {
