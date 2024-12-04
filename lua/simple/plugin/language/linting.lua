@@ -1,5 +1,5 @@
 local linters_by_ft = {
-    twig = { "djlint" },
+    -- twig = { "djlint" },
     markdown = { "markdownlint" },
     dockerfile = { "hadolint" },
     make = { "checkmake" },
