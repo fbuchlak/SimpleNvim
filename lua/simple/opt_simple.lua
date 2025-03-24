@@ -1,7 +1,7 @@
 vim.g.simple_config_php_debug_adapter_path = nil -- string
 vim.g.simple_config_symfony_console_command = nil -- table e.g. { "docker", "compose", "exec", "container", "bin/console" }
 vim.g.simple_config_lint_phpstan_level = 5 -- number (true=disable phpstan in nvim-lint)
-vim.g.simple_config_lint_phpstan_enabled = true -- boolean
+vim.g.simple_config_lint_phpstan_disabled = false -- boolean
 vim.g.simple_config_lint_phpinsights_enabled = false -- boolean
 vim.g.simple_config_lint_phpmd_enabled = false -- boolean
 vim.g.simple_config_lint_phpcs_enabled = false -- boolean

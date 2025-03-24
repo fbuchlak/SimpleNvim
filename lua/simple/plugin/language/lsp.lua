@@ -32,6 +32,7 @@ local servers = {
         },
     },
 
+    biome = {},
     eslint = {
         workingDirectories = { mode = "auto" },
         on_attach = function() vim.keymap.set("n", "<LocalLeader>fe", "<CMD>EslintFixAll<CR>", { desc = "Eslint Fix" }) end,
@@ -55,9 +56,14 @@ local servers = {
         return {
             settings = {
                 twiggy = {
+                    phpExecutable = "php",
+                    symfonyConsolePath = "bin/console",
                     phpBinConsoleCommand = "table" == type(vim.g.simple_config_symfony_console_command)
                             and table.concat(vim.g.simple_config_symfony_console_command, " ")
                         or nil,
+                    diagnostics = {
+                        twigCsFixer = true,
+                    },
                 },
             },
         }

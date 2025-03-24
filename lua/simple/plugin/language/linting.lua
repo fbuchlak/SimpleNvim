@@ -15,8 +15,13 @@ end
 
 set_linters({ "css", "less", "sass", "scss" }, { "stylelint" })
 set_linters({ "sql", "mysql" }, { "sqlfluff" })
-set_linters({ "php", "phtml" }, { "php", "phpstan", "phpinsights", "phpcs", "phpmd" })
-set_linters({ "terraform", "tf" }, { "terraform_validate" })
+
+-- -- Use phpactor instead
+-- set_linters({ "php", "phtml" }, { "php", "phpstan", "phpinsights", "phpcs", "phpmd" })
+
+-- ...
+-- set_linters({ "terraform", "tf" }, { "terraform_validate" })
+
 set_linters({ "nix" }, { "statix", "deadnix" })
 
 return {

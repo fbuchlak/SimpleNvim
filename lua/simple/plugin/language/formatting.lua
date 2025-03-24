@@ -30,8 +30,8 @@ set_formatter_group({
     "html", "css", "sass", "scss", "less",
     "javascript", "javascriptreact",
     "typescript", "typescriptreact",
-    "vue",
-}, { "prettier" })
+    "vue", "json"
+}, { "biome", "prettier" })
 
 return {
     {

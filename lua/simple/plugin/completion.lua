@@ -99,7 +99,6 @@ return {
         dependencies = {
             "rafamadriz/friendly-snippets",
             "h4kst3r/php-awesome-snippets",
-            "nalabdou/twig-code-snippets",
         },
         build = "make install_jsregexp",
         opts = { history = false, delete_check_events = "TextChanged" },
