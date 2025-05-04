@@ -86,7 +86,12 @@ return {
             { "williamboman/mason.nvim" },
             { "williamboman/mason-lspconfig.nvim" },
             { "folke/neoconf.nvim", opts = {} },
-            { "folke/neodev.nvim", opts = {} },
+            {
+                "folke/lazydev.nvim",
+                opts = {
+                    ft = "lua",
+                },
+            },
             { "gbprod/phpactor.nvim" },
             -- { "zeioth/garbage-day.nvim", opts = {} },
         },
@@ -102,6 +107,16 @@ return {
         },
         config = function()
             require("simple.util.diagnostic").reset()
+
+            -- require("lspconfig.configs").php_minimal_lsp = {
+            --     default_config = {
+            --         name = "php_minimal_lsp",
+            --         cmd = { "php", "/home/frederik/projects/fbuchlak/simple-lsp/server.php" }, -- replace with your actual path
+            --         filetypes = { "php" },
+            --         root_dir = require("lspconfig").util.root_pattern("comopser.json", vim.fn.getcwd()),
+            --     },
+            -- }
+            -- require("lspconfig").php_minimal_lsp.setup({})
 
             vim.api.nvim_create_autocmd("LspAttach", {
                 callback = function(args)

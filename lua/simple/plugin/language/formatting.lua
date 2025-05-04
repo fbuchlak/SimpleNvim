@@ -59,6 +59,15 @@ return {
         opts = {
             formatters_by_ft = formatters_by_ft,
             formatters = {
+                rector = {
+                    command = "vendor/bin/rector",
+                    args = { "process", "$FILENAME" },
+                    stdin = false,
+                    -- cwd = require("conform.util").root_file({ "rector.php" }),
+                    require_cwd = true,
+                    exit_codes = { 0, 2 },
+                    inherit = false,
+                },
                 rustywind = {},
                 ["easy-coding-standard"] = function()
                     -- -- To run easy coding standard from container
